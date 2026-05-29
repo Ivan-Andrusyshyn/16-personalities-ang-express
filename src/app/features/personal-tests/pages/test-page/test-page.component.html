@@ -1,170 +1,97 @@
-<div class="page">
-  <div class="page__mesh" aria-hidden="true">
-    <div class="page__orb page__orb--1"></div>
-    <div class="page__orb page__orb--2"></div>
+<div class="page__mesh" aria-hidden="true">
+  <div class="page__orb page__orb--1"></div>
+  <div class="page__orb page__orb--2"></div>
+</div>
+
+<header class="page__header">
+  <button
+    class="page__back"
+    (click)="onPrev()"
+    [class.page__back--hidden]="
+      state.phase() !== 'questions' || state.currentIndex() === 0
+    "
+  >
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+      <path
+        d="M11 4L6 9l5 5"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </button>
+
+  <div class="page__logo">
+    <div class="page__logo-dot"></div>
+    <span>Psych·UA</span>
   </div>
 
-  <header class="page__header">
-    <button
-      class="page__back"
-      (click)="onPrev()"
-      [class.page__back--hidden]="
-        state.phase() !== 'questions' || state.currentIndex() === 0
-      "
-    >
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-        <path
-          d="M11 4L6 9l5 5"
-          stroke="currentColor"
-          stroke-width="1.6"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-    </button>
+  <div class="page__header-right">
+    @if (state.phase() === "questions") {
+      <span class="page__phase-badge">
+        {{ state.currentIndex() + 1 }}/{{ state.questions().length }}
+      </span>
+    }
+  </div>
+</header>
 
-    <div class="page__logo">
-      <div class="page__logo-dot"></div>
-      <span>Psych·UA</span>
-    </div>
+@if (state.phase() === "questions") {
+  <div class="page__progress">
+    <app-test-progress
+      [progress]="state.progress()"
+      [current]="state.currentIndex()"
+      [total]="state.questions().length"
+    />
+  </div>
+}
 
-    <div class="page__header-right">
-      @if (state.phase() === "questions") {
-        <span class="page__phase-badge">
-          {{ state.currentIndex() + 1 }}/{{ state.questions().length }}
-        </span>
-      }
-    </div>
-  </header>
-
-  @if (state.phase() === "questions") {
-    <div class="page__progress">
-      <app-test-progress
-        [progress]="state.progress()"
-        [current]="state.currentIndex()"
-        [total]="state.questions().length"
-      />
-    </div>
-  }
-
-  <main class="page__main">
-    @if (state.phase() === "intro") {
-      <div class="intro">
-        <div class="intro__eyebrow">
-          <span class="intro__tag">Психодіагностика</span>
-        </div>
-
-        <h1 class="intro__title">
-          16 типів<br />
-          <em>особистості</em>
-        </h1>
-
-        <p class="intro__desc">
-          Цей тест допоможе зрозуміти, як минулий досвід впливає на твої
-          стосунки та емоційні реакції сьогодні.
-        </p>
-
-        <div class="intro__meta">
-          <div class="intro__meta-item">
-            <div class="intro__meta-val">
-              {{ state.questions().length || "…" }}
-            </div>
-            <div class="intro__meta-key">питань</div>
-          </div>
-          <div class="intro__meta-sep"></div>
-          <div class="intro__meta-item">
-            <div class="intro__meta-val">10</div>
-            <div class="intro__meta-key">хвилин</div>
-          </div>
-          <div class="intro__meta-sep"></div>
-          <div class="intro__meta-item">
-            <div class="intro__meta-val">∞</div>
-            <div class="intro__meta-key">безкоштовно</div>
-          </div>
-        </div>
-
-        <button
-          class="intro__btn"
-          [disabled]="state.isLoading() || state.questions().length === 0"
-          (click)="onStart()"
-        >
-          @if (state.isLoading()) {
-            <span class="spinner"></span>
-            Завантаження…
-          } @else {
-            Почати тест
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path
-                d="M4 8h8M9 5l3 3-3 3"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          }
-        </button>
-
-        @if (state.error()) {
-          <div class="error-msg">{{ state.error() }}</div>
-        }
+<main class="page__main">
+  @if (state.phase() === "intro") {
+    <div class="intro">
+      <div class="intro__eyebrow">
+        <span class="intro__tag">Психодіагностика</span>
       </div>
-    }
 
-    @if (state.phase() === "questions" && state.currentQuestion()) {
-      <div class="questions-wrap">
-        <app-test-question
-          [question]="state.currentQuestion()!"
-          [questionNumber]="questionNumber"
-          [selected]="state.currentAnswer()"
-          (answered)="onAnswer($event)"
-        />
-      </div>
-    }
+      <h1 class="intro__title">
+        16 типів<br />
+        <em>особистості</em>
+      </h1>
 
-    @if (state.phase() === "loading") {
-      <div class="loading">
-        <div class="loading__anim">
-          <div class="loading__ring loading__ring--1"></div>
-          <div class="loading__ring loading__ring--2"></div>
-          <div class="loading__ring loading__ring--3"></div>
-          <div class="loading__dot"></div>
+      <p class="intro__desc">
+        Цей тест допоможе зрозуміти, як минулий досвід впливає на твої стосунки
+        та емоційні реакції сьогодні.
+      </p>
+
+      <div class="intro__meta">
+        <div class="intro__meta-item">
+          <div class="intro__meta-val">
+            {{ state.questions().length || "…" }}
+          </div>
+          <div class="intro__meta-key">питань</div>
         </div>
-        <p class="loading__text">Аналізую відповіді…</p>
-        <p class="loading__sub">Це займе кілька секунд</p>
+        <div class="intro__meta-sep"></div>
+        <div class="intro__meta-item">
+          <div class="intro__meta-val">10</div>
+          <div class="intro__meta-key">хвилин</div>
+        </div>
+        <div class="intro__meta-sep"></div>
+        <div class="intro__meta-item">
+          <div class="intro__meta-val">∞</div>
+          <div class="intro__meta-key">безкоштовно</div>
+        </div>
       </div>
-    }
 
-    @if (state.phase() === "result" && state.result()) {
-      <app-test-result
-        [result]="state.result()!"
-        (onRestart)="onRestart()"
-        (onShare)="onRestart()"
-      />
-    }
-  </main>
-
-  @if (state.phase() === "questions") {
-    <footer class="page__footer">
       <button
-        class="page__next"
-        [disabled]="!state.currentAnswer()"
-        [class.page__next--last]="state.isLastQuestion()"
-        (click)="onNext()"
+        class="intro__btn"
+        [disabled]="state.isLoading() || state.questions().length === 0"
+        (click)="onStart()"
       >
-        @if (state.isLastQuestion()) {
-          Завершити тест
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path
-              d="M3 8l3.5 3.5L13 4"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
+        @if (state.isLoading()) {
+          <span class="spinner"></span>
+          Завантаження…
         } @else {
-          Наступне питання
+          Почати тест
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path
               d="M4 8h8M9 5l3 3-3 3"
@@ -176,6 +103,77 @@
           </svg>
         }
       </button>
-    </footer>
+
+      @if (state.error()) {
+        <div class="error-msg">{{ state.error() }}</div>
+      }
+    </div>
   }
-</div>
+
+  @if (state.phase() === "questions" && state.currentQuestion()) {
+    <div class="questions-wrap">
+      <app-test-question
+        [question]="state.currentQuestion()!"
+        [questionNumber]="questionNumber"
+        [selected]="state.currentAnswer()"
+        (answered)="onAnswer($event)"
+      />
+    </div>
+  }
+
+  @if (state.phase() === "loading") {
+    <div class="loading">
+      <div class="loading__anim">
+        <div class="loading__ring loading__ring--1"></div>
+        <div class="loading__ring loading__ring--2"></div>
+        <div class="loading__ring loading__ring--3"></div>
+        <div class="loading__dot"></div>
+      </div>
+      <p class="loading__text">Аналізую відповіді…</p>
+      <p class="loading__sub">Це займе кілька секунд</p>
+    </div>
+  }
+
+  @if (state.phase() === "result" && state.result()) {
+    <app-test-result
+      [result]="state.result()!"
+      (onRestart)="onRestart()"
+      (onShare)="onRestart()"
+    />
+  }
+</main>
+
+@if (state.phase() === "questions") {
+  <footer class="page__footer">
+    <button
+      class="page__next"
+      [disabled]="!state.currentAnswer()"
+      [class.page__next--last]="state.isLastQuestion()"
+      (click)="onNext()"
+    >
+      @if (state.isLastQuestion()) {
+        Завершити тест
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path
+            d="M3 8l3.5 3.5L13 4"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      } @else {
+        Наступне питання
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path
+            d="M4 8h8M9 5l3 3-3 3"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      }
+    </button>
+  </footer>
+}

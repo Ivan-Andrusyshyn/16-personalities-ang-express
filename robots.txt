@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://16-personalities-ang-express.vercel.app/sitemap.xml

@@ -1,0 +1,74 @@
+.hero {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: #e5e5e5;
+  margin-bottom: 1.4rem;
+}
+
+.cta {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  border: 2px solid #ccc;
+  background: #111;
+  color: #fff;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.cta:hover {
+  transform: scale(1.05);
+}
+
+.info,
+.features {
+  margin-top: 1.5rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #e5e5e5;
+}
+
+ul {
+  padding-left: 1.1rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+/* DESKTOP */
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2.625rem;
+  }
+
+  .subtitle {
+    font-size: 1.125rem;
+  }
+
+  .cta {
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+  }
+}

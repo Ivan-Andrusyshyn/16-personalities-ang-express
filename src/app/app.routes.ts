@@ -1,8 +1,11 @@
-// src/app/app.routes.ts
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'test/16-personalities', pathMatch: 'full' },
+  {
+    path: '',
+    loadComponent: () =>
+      import('./features/home/home.component').then((m) => m.HomeComponent),
+  },
   {
     path: 'test/:testName',
     loadComponent: () =>
