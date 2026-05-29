@@ -35,11 +35,10 @@ const monopay_route_1 = __importDefault(require("./routes/monopay.route"));
 const feedback_route_1 = __importDefault(require("./routes/feedback.route"));
 const counter_route_1 = __importDefault(require("./routes/counter.route"));
 const redise_service_1 = require("./services/redise.service");
-const bot_instance_1 = require("./bot/bot-instance");
 const server = (0, express_1.default)();
-server.set("trust proxy", 1);
-server.set("view engine", "pug");
-server.set("views", path_1.default.join(__dirname, "views"));
+server.set('trust proxy', 1);
+server.set('view engine', 'pug');
+server.set('views', path_1.default.join(__dirname, 'views'));
 server.use((0, cors_1.default)(cors_2.default));
 server.use((0, helmet_1.default)());
 server.use(limiter_1.limiter);
@@ -49,21 +48,19 @@ server.use((req, res, next) => {
     next();
 });
 server.use((0, cookie_parser_1.default)());
-server.use(body_parser_1.default.urlencoded({ extended: true, limit: "50mb" }));
-server.use(body_parser_1.default.json({ limit: "50mb" }));
-(0, bot_instance_1.initBot)();
-(0, mongo_1.connectToDB)();
-server.use((0, morgan_1.default)("dev"));
-server.use("/api/monopay", monopay_route_1.default);
-server.use("/api/rating", star_rating_route_1.default);
-server.use("/api/google-drive", google_drive_route_1.default);
-server.use("/api/files", load_files_route_1.default);
-server.use("/api/consultation", consultations_route_1.default);
-server.use("/api/counter", counter_route_1.default);
-server.use("/api/send-email", mailer_route_1.default);
-server.use("/api/google", google_sheets_route_1.default);
-server.use("/api/feedback", feedback_route_1.default);
-server.use("/api/tests", _16_personalties_route_1.default);
+server.use(body_parser_1.default.urlencoded({ extended: true, limit: '50mb' }));
+server.use(body_parser_1.default.json({ limit: '50mb' }));
+server.use((0, morgan_1.default)('dev'));
+server.use('/api/monopay', monopay_route_1.default);
+server.use('/api/rating', star_rating_route_1.default);
+server.use('/api/google-drive', google_drive_route_1.default);
+server.use('/api/files', load_files_route_1.default);
+server.use('/api/consultation', consultations_route_1.default);
+server.use('/api/counter', counter_route_1.default);
+server.use('/api/send-email', mailer_route_1.default);
+server.use('/api/google', google_sheets_route_1.default);
+server.use('/api/feedback', feedback_route_1.default);
+server.use('/api/tests', _16_personalties_route_1.default);
 server.use((err, req, res, next) => {
     const status = err.status || 500;
     const message = err.message || err;
@@ -73,12 +70,14 @@ server.use((err, req, res, next) => {
 const start = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield redise_service_1.redisService.connect();
+        // initBot();
+        yield (0, mongo_1.connectToDB)();
         server.listen(port, () => {
-            console.log("All configs works!");
+            console.log('All configs works!');
         });
     }
     catch (error) {
-        console.error("Startup error:", error);
+        console.error('Startup error:', error);
         process.exit(1);
     }
 });
