@@ -1,0 +1,61 @@
+.tp {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px;
+}
+
+.tp__track {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  overflow: visible;
+  position: relative;
+}
+
+.tp__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  border-radius: 3px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.tp__glow {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-2);
+  box-shadow: 0 0 8px 2px var(--accent-2);
+  transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.tp__meta {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+}
+
+.tp__current {
+  color: var(--accent-2);
+  font-weight: 700;
+  min-width: 16px;
+  text-align: right;
+}
+
+.tp__sep {
+  color: var(--muted);
+  margin: 0 1px;
+}
+
+.tp__total {
+  color: var(--muted);
+}

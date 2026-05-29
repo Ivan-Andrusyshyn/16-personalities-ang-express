@@ -1,0 +1,11 @@
+<div class="tp">
+  <div class="tp__track">
+    <div class="tp__fill" [style.width.%]="progress"></div>
+    <div class="tp__glow" [style.left.%]="progress"></div>
+  </div>
+  <div class="tp__meta">
+    <span class="tp__current">{{ current + 1 }}</span>
+    <span class="tp__sep">/</span>
+    <span class="tp__total">{{ total }}</span>
+  </div>
+</div>

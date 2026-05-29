@@ -1,0 +1,175 @@
+.tq {
+  animation: slideIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @media (min-width: 600px) {
+    padding: 0 20px;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.tq--entering .tq__option {
+  opacity: 0;
+  animation: optIn 0.35s ease both;
+}
+
+@keyframes optIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Номер питання */
+.tq__q-wrap {
+  margin-bottom: 20px;
+}
+
+.tq__q-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-1);
+  opacity: 0.7;
+  margin-bottom: 10px;
+  font-family: var(--font-mono);
+}
+
+.tq__q-text {
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 4.5vw, 24px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+/* Варіанти */
+.tq__options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tq__option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1.5px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    transform 0.15s;
+  animation: optIn 0.35s ease both;
+  position: relative;
+  overflow: hidden;
+}
+
+.tq__option::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--accent-rgb-1), 0.06) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.tq__option:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.07);
+  transform: translateX(3px);
+}
+
+.tq__option:hover::before {
+  opacity: 1;
+}
+
+.tq__option--selected {
+  border-color: var(--accent-1) !important;
+  background: rgba(var(--accent-rgb-1), 0.1) !important;
+  transform: translateX(3px);
+}
+
+.tq__option--selected::before {
+  opacity: 1 !important;
+}
+
+/* Буква варіанта */
+.tq__option-letter {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.tq__option--selected .tq__option-letter {
+  background: var(--accent-1);
+  color: #fff;
+  border-color: var(--accent-1);
+}
+
+.tq__option-text {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text);
+  font-weight: 300;
+}
+
+/* Чекмарк */
+.tq__option-check {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: transparent;
+  transition: all 0.2s;
+}
+
+.tq__option--selected .tq__option-check {
+  border-color: var(--accent-2);
+  background: var(--accent-2);
+  color: #fff;
+}

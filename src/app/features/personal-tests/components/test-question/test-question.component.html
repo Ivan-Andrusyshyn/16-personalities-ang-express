@@ -1,0 +1,33 @@
+<div class="tq" [class.tq--entering]="entering()">
+  <div class="tq__q-wrap">
+    <div class="tq__q-num">{{ questionNumber }}</div>
+    <h2 class="tq__q-text">{{ question.question }}</h2>
+  </div>
+
+  <div class="tq__options">
+    @for (opt of question.answers; let i = $index; track i) {
+      <button
+        class="tq__option"
+        [class.tq__option--selected]="
+          selectedType() === buildAnswerType(question.id, opt)
+        "
+        [style.animation-delay]="i * 0.06 + 's'"
+        (click)="select(opt)"
+      >
+        <span class="tq__option-letter">{{ letters[i] }}</span>
+        <span class="tq__option-text">{{ opt.text }}</span>
+        <span class="tq__option-check">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path
+              d="M2.5 7l3 3 6-6"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </span>
+      </button>
+    }
+  </div>
+</div>

@@ -1,0 +1,56 @@
+import { MainTestNames } from '../content/testsNames';
+
+export type Answer = Record<number, string>;
+export type TestName =
+  | 'you-coffee'
+  | 'be-yourself'
+  | 'attractiveness'
+  | 'traumatic-experience'
+  | 'role-in-relationships'
+  | 'toxical-relationships';
+
+export interface Question {
+  id: number;
+  question: string;
+  answers: Option[];
+}
+export interface Option {
+  text: string;
+  type: string;
+  point?: string | number;
+}
+export type TestResultRequest = {
+  answers: Answer[];
+  userInformation: {
+    testName: string;
+    referrer: string;
+    routeTracker: string;
+    timestamp: string;
+    device: string;
+  };
+};
+export type CardContent = {
+  testName: MainTestNames;
+  time: string;
+  category: string[] | string;
+  routeStart: string;
+  testPrice: string | null;
+  title: string;
+  imgWebUrl?: string;
+  imgList: Array<number>;
+  subtitle: string;
+  buttonText: string;
+  imageUrl: string;
+  color: string;
+};
+export interface TestResults {
+  type: string;
+  title: string;
+  category: string;
+  subtitle: string;
+  sections: Array<{
+    title: string;
+    sectionsDescription: string;
+    sectionsList: string[];
+  }>;
+}
