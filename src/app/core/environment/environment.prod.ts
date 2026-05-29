@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://alex-consultations-server.vercel.app',
+  apiUrl: 'https://16-personalities-ang-express-ylr4.vercel.app/',
 };

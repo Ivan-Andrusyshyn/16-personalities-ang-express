@@ -1,9 +1,7 @@
 const corsOptions = {
   origin: [
-    'https://alex-consultations.vercel.app',
+    'https://16-personalities-ang-express.vercel.app',
     'http://localhost:4200',
-    'https://vidchuttia.com.ua',
-    'http://vidchuttia.com.ua',
   ],
   methods: ['GET', 'POST', 'HEAD', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
