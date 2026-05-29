@@ -86,8 +86,6 @@ export class PersonalTestsStateService {
         if (storageData.result) {
           storageData.phase = 'result';
         }
-        console.log(storageData);
-
         this.patch(storageData);
       }
     }
